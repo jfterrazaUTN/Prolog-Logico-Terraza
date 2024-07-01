@@ -101,3 +101,8 @@ leGustaA(gus, UnaObra):-
 esLibro(Obra) :-
   escribio(_,Obra),
   not(esComic(Obra)).
+
+/*Teniendo en cuenta la base de conocimientos que vimos en clase, 
+traer resuelto para la clase que viene el siguiente pedido: 
+Queremos saber si una obra es rioplatense, que es cuando la nacionalidad
+de su artista es platense (Uruguay o Argentina).*/
