@@ -106,3 +106,63 @@ esLibro(Obra) :-
 traer resuelto para la clase que viene el siguiente pedido: 
 Queremos saber si una obra es rioplatense, que es cuando la nacionalidad
 de su artista es platense (Uruguay o Argentina).*/
+
+%Trabajado en Clase 01-07
+
+nacionalidad(elsaBornemann, argentina).
+nacionalidad(jorgeLuisBorges, argentina).
+nacionalidad(joseHernandez, argentina).
+nacionalidad(julioCortazar, argentina).
+nacionalidad(horacioQuiroga, uruguay).
+nacionalidad(galeano, uruguay).
+nacionalidad(neruda, chilena).
+
+esObraRioPlatense(Obra):-
+  escribio(Artista, Obra),
+  esArtistaRioPlatense(Artista).
+
+esArtistaRioPlatense(Artista):-
+  nacionalidad(Artista, Nacionalidad),
+  esNacionalidadRioPlatense(Nacionalidad).
+
+esNacionalidadRioPlatense(argentina).
+esNacionalidadRioPlatense(uruguay).
+
+%-----%
+
+%∀ x / P(x) -> Q(x)
+%forall(antecedente, consecuente)
+
+soloEscribioComics(UnArtista):-
+  escribio(UnArtista, _), %Generador. Hace que mi predicado sea inversible
+  forall(escribio(UnArtista, Obra), esComic(Obra)).
+
+%functores de genero de libro
+%novela(Tema, CantidadDeCapitulos)
+%libroDeCuentos(CantidadDeCuentos)
+%cientifico(Disciplina)
+%bestSeller(Precio, CantidadDePaginas)
+
+esDeGenero(it,novela(terror, 11)).
+esDeGenero(ficciones, libroDeCuentos(17)).
+esDeGenero(lenguajeC, libroCientifico(programacion)).
+esDeGenero(harryPotter, bestSeller(32000, 636)).
+
+estaBuena(Obra):-
+  esDeGenero(Obra, Genero),
+  esBuenGenero(Genero).
+
+esBuenGenero(novela(terror, _)).
+
+esBuenGenero(libroDeCuentos(Cantidad)):-
+  Cantidad > 10.
+
+esBuenGenero(bestSeller(Precio, Paginas)):-
+  Precio/Paginas < 50.
+
+esBuenGenero(novela(policial, Capitulos)):-
+  Capitulos < 12.
+
+esBuenGenero(libroCientifico(fisicaCuantica)).
+
+%Usamos POLIMORFISMO para poder definir "esBuenGenero". 
